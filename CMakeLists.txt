@@ -13,6 +13,7 @@ pkg_check_modules(PC_FFTW3 REQUIRED fftw3f)
 pkg_check_modules(PC_ALSA REQUIRED alsa)
 pkg_check_modules(PC_LIBCONFIG REQUIRED libconfig)
 pkg_check_modules(PC_PULSEAUDIO REQUIRED libpulse-simple)
+pkg_check_modules(PC_HDF5 REQUIRED hdf5-serial)
 
 include_directories("${PROJECT_SOURCE_DIR}/include")
 
@@ -188,6 +189,7 @@ set(SRC
     src/sink/snk_powers.c
     src/sink/snk_spectra.c
     src/sink/snk_tracks.c
+    src/sink/snk_samples.c
     src/source/src_hops.c
 
 )
@@ -196,11 +198,14 @@ add_library(odas SHARED
     ${SRC}
 )
 
+target_include_directories(odas PUBLIC ${PC_HDF5_INCLUDE_DIRS})
+
 target_link_libraries(odas
     ${PC_FFTW3_LIBRARIES}
     ${PC_ALSA_LIBRARIES}
     ${PC_LIBCONFIG_LIBRARIES}
     ${PC_PULSEAUDIO_LIBRARIES}
+    ${pkgcfg_lib_PC_HDF5_hdf5}
     m
     pthread
 )

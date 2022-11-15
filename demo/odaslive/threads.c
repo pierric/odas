@@ -535,6 +535,8 @@
 
                 snk_pots_open(objs->snk_pots_ssl_object);
 
+                snk_samples_open(objs->snk_samples_object);
+
         // +----------------------------------------------------------+
         // | SST                                                      |
         // +----------------------------------------------------------+  
@@ -591,6 +593,8 @@
             // +------------------------------------------------------+                      
 
                 snk_pots_close(objs->snk_pots_ssl_object);
+
+                snk_samples_close(objs->snk_samples_object);
 
         // +----------------------------------------------------------+
         // | SST                                                      |
@@ -803,7 +807,10 @@
                     begin = clock();
                     snk_pots_process(objs->snk_pots_ssl_object);
                     end = clock();
-                    prf->snk_pots_ssl_prf += (float) (((double) (end-begin)) / CLOCKS_PER_SEC);                                                
+                    prf->snk_pots_ssl_prf += (float) (((double) (end-begin)) / CLOCKS_PER_SEC);
+
+                    // no profiling yet
+                    snk_samples_process(objs->snk_samples_object);
 
             // +------------------------------------------------------+
             // | Targets                                              |

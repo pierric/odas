@@ -35,6 +35,7 @@ extern "C" {
     #include <sink/snk_powers.h>
     #include <sink/snk_spectra.h>
     #include <sink/snk_tracks.h>
+    #include <sink/snk_samples.h>
     #include <source/src_hops.h>
     #include <aconnector/acon_categories.h>
     #include <aconnector/acon_hops.h>

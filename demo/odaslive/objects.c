@@ -62,7 +62,7 @@
                 // | Connector                                        |
                 // +--------------------------------------------------+  
 
-                    objs->con_hops_mics_rs_object = con_hops_construct(2, cfgs->msg_hops_mics_rs_config);                    
+                    objs->con_hops_mics_rs_object = con_hops_construct(3, cfgs->msg_hops_mics_rs_config);                    
 
             // +------------------------------------------------------+
             // | STFT                                                 |
@@ -80,7 +80,7 @@
                 // | Connector                                        |
                 // +--------------------------------------------------+  
 
-                    objs->con_spectra_mics_object = con_spectra_construct(3, cfgs->msg_spectra_mics_config);
+                    objs->con_spectra_mics_object = con_spectra_construct(4, cfgs->msg_spectra_mics_config);
 
             // +------------------------------------------------------+
             // | Noise                                                |
@@ -119,11 +119,13 @@
                     objs->snk_pots_ssl_object = snk_pots_construct(cfgs->snk_pots_ssl_config, 
                                                                    cfgs->msg_pots_ssl_config);
 
+                    objs->snk_samples_object = snk_samples_construct(cfgs->snk_samples_config);
+
                 // +--------------------------------------------------+
                 // | Connector                                        |
                 // +--------------------------------------------------+ 
 
-                objs->con_pots_ssl_object = con_pots_construct(2, cfgs->msg_pots_ssl_config);
+                objs->con_pots_ssl_object = con_pots_construct(3, cfgs->msg_pots_ssl_config);
 
             // +------------------------------------------------------+
             // | Target                                               |
@@ -373,6 +375,11 @@
 
                     snk_pots_connect(objs->snk_pots_ssl_object,
                                      objs->con_pots_ssl_object->outs[1]);
+
+                    snk_samples_connect(objs->snk_samples_object,
+                                        objs->con_hops_mics_rs_object->outs[2],
+                                        objs->con_pots_ssl_object->outs[2],
+                                        objs->con_spectra_mics_object->outs[3]);
 
             // +------------------------------------------------------+
             // | Target                                               |
@@ -662,6 +669,7 @@
                 // +--------------------------------------------------+  
 
                     snk_pots_destroy(objs->snk_pots_ssl_object);
+                    snk_samples_destroy(objs->snk_samples_object);
 
                 // +--------------------------------------------------+
                 // | Connector                                        |

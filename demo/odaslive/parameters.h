@@ -49,6 +49,8 @@
 
     snk_pots_cfg * parameters_snk_pots_ssl_config(const char * fileConfig);
 
+    snk_samples_cfg * parameters_snk_samples_config(const char * fileConfig);
+
 
     inj_targets_cfg * parameters_inj_targets_sst_config(const char * fileConfig);
 

@@ -829,6 +829,49 @@
 
     }
 
+    snk_samples_cfg * parameters_snk_samples_config(const char * fileConfig) {
+        snk_samples_cfg * cfg;
+        char * tmpStr1;
+        char * tmpStr2;
+
+        cfg = snk_samples_cfg_construct();
+
+        cfg->pots_min_energy = parameters_lookup_float(fileConfig, "ssl.samples.pots_min_energy");
+        cfg->nPots = parameters_lookup_int(fileConfig, "ssl.nPots");
+
+        cfg->hops_dims[0] = parameters_lookup_int(fileConfig, "raw.nChannels");
+        cfg->hops_dims[1] = parameters_lookup_int(fileConfig, "raw.hopSize");
+
+        cfg->freqs_dims[0] = parameters_count(fileConfig, "mapping.map");
+        uint halfFrameSize = parameters_lookup_int(fileConfig, "general.size.frameSize") / 2 + 1;
+        cfg->freqs_dims[1] = halfFrameSize * 2;
+
+        tmpStr1 = parameters_lookup_string(fileConfig, "ssl.samples.interface.type");
+
+        if (strcmp(tmpStr1, "blackhole") == 0) {
+
+            cfg->interface = interface_construct_blackhole();
+
+        }
+        else if (strcmp(tmpStr1, "file") == 0) {
+
+            tmpStr2 = parameters_lookup_string(fileConfig, "ssl.samples.interface.path");
+            cfg->interface = interface_construct_file(tmpStr2);
+            free((void *) tmpStr2);
+
+        }
+        else {
+
+            printf("ssl.samples.interface.type: Invalid type\n");
+            exit(EXIT_FAILURE);
+
+        }
+
+        free((void *) tmpStr1);
+
+        return cfg;
+    }
+
     inj_targets_cfg * parameters_inj_targets_sst_config(const char * fileConfig) {
 
         inj_targets_cfg * cfg;

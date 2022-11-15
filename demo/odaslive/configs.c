@@ -111,6 +111,8 @@
 
                 cfgs->snk_pots_ssl_config = parameters_snk_pots_ssl_config(file_config);
 
+                cfgs->snk_samples_config = parameters_snk_samples_config(file_config);
+
         // +----------------------------------------------------------+
         // | Target                                                   |
         // +----------------------------------------------------------+  
