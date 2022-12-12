@@ -28,6 +28,8 @@
         snk_pots_cfg * snk_pots_ssl_config;
 
         snk_samples_cfg * snk_samples_config;
+        msg_hops_cfg * msg_hops_raw_config;
+        snk_hops_cfg * snk_hops_raw_config;
 
         inj_targets_cfg * inj_targets_sst_config;
         msg_targets_cfg * msg_targets_sst_config;

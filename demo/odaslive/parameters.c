@@ -7,17 +7,17 @@
         config_setting_t * setting;
         int rtnValue;
 
-        config_init(&cfg); 
+        config_init(&cfg);
 
         if(!config_read_file(&cfg, file))
         {
-            
+
             printf("%s:%d - %s\n", config_error_file(&cfg), config_error_line(&cfg), config_error_text(&cfg));
             config_destroy(&cfg);
-          
+
             exit(EXIT_FAILURE);
 
-        }       
+        }
 
         if ((setting = config_lookup(&cfg, path)) == NULL) {
 
@@ -29,7 +29,7 @@
 
         rtnValue = config_setting_get_int(setting);
 
-        config_destroy(&cfg);   
+        config_destroy(&cfg);
 
         return rtnValue;
 
@@ -41,17 +41,17 @@
         config_setting_t * setting;
         float rtnValue;
 
-        config_init(&cfg); 
+        config_init(&cfg);
 
         if(!config_read_file(&cfg, file))
         {
-            
+
             printf("%s:%d - %s\n", config_error_file(&cfg), config_error_line(&cfg), config_error_text(&cfg));
             config_destroy(&cfg);
-          
+
             exit(EXIT_FAILURE);
 
-        }       
+        }
 
         if ((setting = config_lookup(&cfg, path)) == NULL) {
 
@@ -63,7 +63,7 @@
 
         rtnValue = (float) config_setting_get_float(setting);
 
-        config_destroy(&cfg);   
+        config_destroy(&cfg);
 
         return rtnValue;
 
@@ -76,17 +76,17 @@
         const char * tmpStr;
         char * rtnStr;
 
-        config_init(&cfg); 
+        config_init(&cfg);
 
         if(!config_read_file(&cfg, file))
         {
-            
+
             printf("%s:%d - %s\n", config_error_file(&cfg), config_error_line(&cfg), config_error_text(&cfg));
             config_destroy(&cfg);
-          
+
             exit(EXIT_FAILURE);
 
-        }       
+        }
 
         if ((setting = config_lookup(&cfg, path)) == NULL) {
 
@@ -101,9 +101,9 @@
         rtnStr = (char *) malloc(sizeof(char) * (strlen(tmpStr)+1));
         strcpy(rtnStr, tmpStr);
 
-        config_destroy(&cfg);   
+        config_destroy(&cfg);
 
-        return rtnStr;        
+        return rtnStr;
 
     }
 
@@ -113,17 +113,17 @@
         config_setting_t * setting;
         unsigned int rtnValue;
 
-        config_init(&cfg); 
+        config_init(&cfg);
 
         if(!config_read_file(&cfg, file))
         {
-            
+
             printf("%s:%d - %s\n", config_error_file(&cfg), config_error_line(&cfg), config_error_text(&cfg));
             config_destroy(&cfg);
-          
+
             exit(EXIT_FAILURE);
 
-        }       
+        }
 
         if ((setting = config_lookup(&cfg, path)) == NULL) {
 
@@ -135,7 +135,7 @@
 
         rtnValue = config_setting_length(setting);
 
-        config_destroy(&cfg);   
+        config_destroy(&cfg);
 
         return rtnValue;
 
@@ -172,7 +172,7 @@
 
             tmpStr1 = parameters_lookup_string(fileConfig, "raw.interface.type");
 
-            if (strcmp(tmpStr1, "file") == 0) { 
+            if (strcmp(tmpStr1, "file") == 0) {
 
                 tmpStr2 = parameters_lookup_string(fileConfig, "raw.interface.path");
 
@@ -181,7 +181,7 @@
                 free((void *) tmpStr2);
 
             }
-            else if (strcmp(tmpStr1, "socket") == 0) { 
+            else if (strcmp(tmpStr1, "socket") == 0) {
 
                 tmpStr2 = parameters_lookup_string(fileConfig, "raw.interface.ip");
                 tmpInt1 = parameters_lookup_int(fileConfig, "raw.interface.port");
@@ -239,7 +239,7 @@
         // | Sample rate                                              |
         // +----------------------------------------------------------+
 
-            cfg->fS = parameters_lookup_int(fileConfig, "raw.fS");        
+            cfg->fS = parameters_lookup_int(fileConfig, "raw.fS");
 
         // +----------------------------------------------------------+
         // | Hop size                                                 |
@@ -290,7 +290,7 @@
             printf("Invalid channel map\n");
             exit(EXIT_FAILURE);
         }
-        
+
         return map;
     }
 
@@ -311,7 +311,7 @@
             cfg->links = links_construct_zero(nLinks);
 
             for (iLink = 0; iLink < nLinks; iLink++) {
-                
+
                 tmpStr1 = (char *) malloc(sizeof(char) * 1024);
                 sprintf(tmpStr1, "mapping.map.[%u]", iLink);
                 cfg->links->array[iLink] = parameters_lookup_int(fileConfig, tmpStr1);
@@ -333,7 +333,7 @@
         // | Sample rate                                              |
         // +----------------------------------------------------------+
 
-            cfg->fS = parameters_lookup_int(fileConfig, "raw.fS");        
+            cfg->fS = parameters_lookup_int(fileConfig, "raw.fS");
 
         // +----------------------------------------------------------+
         // | Hop size                                                 |
@@ -364,8 +364,8 @@
         // | Sample rates                                             |
         // +----------------------------------------------------------+
 
-            tmpInt1 = parameters_lookup_int(fileConfig, "raw.fS");        
-            tmpInt2 = parameters_lookup_int(fileConfig, "general.samplerate.mu");              
+            tmpInt1 = parameters_lookup_int(fileConfig, "raw.fS");
+            tmpInt2 = parameters_lookup_int(fileConfig, "general.samplerate.mu");
 
             if (tmpInt1 < tmpInt2) {
                 printf("general.samplerate.mu: This sample rate must be smaller or equal to raw.fS");
@@ -389,7 +389,7 @@
         // | Sample rate                                              |
         // +----------------------------------------------------------+
 
-            cfg->fS = parameters_lookup_int(fileConfig, "general.samplerate.mu");        
+            cfg->fS = parameters_lookup_int(fileConfig, "general.samplerate.mu");
 
         // +----------------------------------------------------------+
         // | Hop size                                                 |
@@ -431,7 +431,7 @@
         // | Sample rate                                              |
         // +----------------------------------------------------------+
 
-            cfg->fS = parameters_lookup_int(fileConfig, "general.samplerate.mu");        
+            cfg->fS = parameters_lookup_int(fileConfig, "general.samplerate.mu");
 
         // +----------------------------------------------------------+
         // | Hop size                                                 |
@@ -483,7 +483,7 @@
         // | alphaD                                                   |
         // +----------------------------------------------------------+
 
-            cfg->alphaD = parameters_lookup_float(fileConfig, "sne.alphaD");            
+            cfg->alphaD = parameters_lookup_float(fileConfig, "sne.alphaD");
 
         return cfg;
 
@@ -503,7 +503,7 @@
         // | Sample rate                                              |
         // +----------------------------------------------------------+
 
-            cfg->fS = parameters_lookup_int(fileConfig, "general.samplerate.mu");        
+            cfg->fS = parameters_lookup_int(fileConfig, "general.samplerate.mu");
 
         // +----------------------------------------------------------+
         // | Hop size                                                 |
@@ -571,7 +571,7 @@
                         cfg->mics->sigma2[iChannel * 9 + iSample] = parameters_lookup_float(fileConfig, tmpLabel);
                         free((void *) tmpLabel);
 
-                    }            
+                    }
 
                 // +--------------------------------------------------+
                 // | Direction                                        |
@@ -584,7 +584,7 @@
                         cfg->mics->direction[iChannel * 3 + iSample] = parameters_lookup_float(fileConfig, tmpLabel);
                         free((void *) tmpLabel);
 
-                    } 
+                    }
 
                 // +--------------------------------------------------+
                 // | Angle                                            |
@@ -635,7 +635,7 @@
         // +----------------------------------------------------------+
         // | Levels                                                   |
         // +----------------------------------------------------------+
-            
+
             cfg->nLevels = parameters_count(fileConfig, "ssl.scans");
 
             cfg->levels = (unsigned int *) malloc(sizeof(unsigned int) * cfg->nLevels);
@@ -742,7 +742,7 @@
         // | Sample rate                                              |
         // +----------------------------------------------------------+
 
-            cfg->fS = parameters_lookup_int(fileConfig, "general.samplerate.mu");        
+            cfg->fS = parameters_lookup_int(fileConfig, "general.samplerate.mu");
 
         // +----------------------------------------------------------+
         // | Number of potential sources                              |
@@ -782,7 +782,7 @@
             else if (strcmp(tmpStr1, "undefined") == 0) { cfg->format = format_construct_undefined(); }
             else { printf("ssl.potential.format: Invalid format\n"); exit(EXIT_FAILURE); }
 
-            free((void *) tmpStr1);       
+            free((void *) tmpStr1);
 
         // +----------------------------------------------------------+
         // | Interface                                                |
@@ -795,14 +795,14 @@
                 cfg->interface = interface_construct_blackhole();
 
             }
-            else if (strcmp(tmpStr1, "file") == 0) { 
+            else if (strcmp(tmpStr1, "file") == 0) {
 
                 tmpStr2 = parameters_lookup_string(fileConfig, "ssl.potential.interface.path");
                 cfg->interface = interface_construct_file(tmpStr2);
                 free((void *) tmpStr2);
 
             }
-            else if (strcmp(tmpStr1, "socket") == 0) { 
+            else if (strcmp(tmpStr1, "socket") == 0) {
 
                 tmpStr2 = parameters_lookup_string(fileConfig, "ssl.potential.interface.ip");
                 tmpInt1 = parameters_lookup_int(fileConfig, "ssl.potential.interface.port");
@@ -813,7 +813,7 @@
             }
             else if (strcmp(tmpStr1, "terminal") == 0) {
 
-                cfg->interface = interface_construct_terminal();               
+                cfg->interface = interface_construct_terminal();
 
             }
             else {
@@ -877,7 +877,7 @@
         inj_targets_cfg * cfg;
         unsigned int iTarget;
         unsigned int nTargets;
-        float x, y, z;        
+        float x, y, z;
         char * tmpStr1;
         char * tmpStr2;
 
@@ -885,15 +885,15 @@
 
         // +----------------------------------------------------------+
         // | Number of targets                                        |
-        // +----------------------------------------------------------+        
+        // +----------------------------------------------------------+
 
-            nTargets = parameters_count(fileConfig, "sst.target");      
+            nTargets = parameters_count(fileConfig, "sst.target");
 
             cfg->nTargets = nTargets;
 
         // +----------------------------------------------------------+
         // | Targets                                                  |
-        // +----------------------------------------------------------+        
+        // +----------------------------------------------------------+
 
             cfg->targets = targets_construct_zero(nTargets);
 
@@ -917,7 +917,7 @@
                 tmpStr1 = (char *) malloc(sizeof(char) * 1024);
                 sprintf(tmpStr1, "sst.target.[%u].z",iTarget);
                 z = parameters_lookup_float(fileConfig, tmpStr1);
-                free((void *) tmpStr1);                
+                free((void *) tmpStr1);
 
                 strcpy(cfg->targets->tags[iTarget],tmpStr2);
                 cfg->targets->array[iTarget *3 + 0] = x;
@@ -941,9 +941,9 @@
 
         // +----------------------------------------------------------+
         // | Number of targets                                        |
-        // +----------------------------------------------------------+        
+        // +----------------------------------------------------------+
 
-            nTargets = parameters_count(fileConfig, "sst.target");      
+            nTargets = parameters_count(fileConfig, "sst.target");
 
             cfg->nTargets = nTargets;
 
@@ -951,7 +951,7 @@
         // | Sample rate                                              |
         // +----------------------------------------------------------+
 
-            cfg->fS = parameters_lookup_int(fileConfig, "general.samplerate.mu");              
+            cfg->fS = parameters_lookup_int(fileConfig, "general.samplerate.mu");
 
         return cfg;
 
@@ -1060,7 +1060,7 @@
 
         // +----------------------------------------------------------+
         // | GMM Active                                               |
-        // +----------------------------------------------------------+            
+        // +----------------------------------------------------------+
 
             nGaussians = parameters_count(fileConfig, "sst.active");
 
@@ -1088,7 +1088,7 @@
 
         // +----------------------------------------------------------+
         // | GMM Inactive                                             |
-        // +----------------------------------------------------------+  
+        // +----------------------------------------------------------+
 
             nGaussians = parameters_count(fileConfig, "sst.inactive");
 
@@ -1116,7 +1116,7 @@
 
         // +----------------------------------------------------------+
         // | Pfalse, Pnew and Ptrack                                  |
-        // +----------------------------------------------------------+  
+        // +----------------------------------------------------------+
 
             cfg->Pfalse = parameters_lookup_float(fileConfig, "sst.Pfalse");
             cfg->Pnew = parameters_lookup_float(fileConfig, "sst.Pnew");
@@ -1124,20 +1124,20 @@
 
         // +----------------------------------------------------------+
         // | New                                                      |
-        // +----------------------------------------------------------+  
+        // +----------------------------------------------------------+
 
             cfg->theta_new = parameters_lookup_float(fileConfig, "sst.theta_new");
 
         // +----------------------------------------------------------+
         // | Prob                                                     |
-        // +----------------------------------------------------------+  
+        // +----------------------------------------------------------+
 
             cfg->theta_prob = parameters_lookup_float(fileConfig, "sst.theta_prob");
             cfg->N_prob = parameters_lookup_int(fileConfig, "sst.N_prob");
 
         // +----------------------------------------------------------+
         // | Inactive                                                 |
-        // +----------------------------------------------------------+  
+        // +----------------------------------------------------------+
 
             cfg->theta_inactive = parameters_lookup_float(fileConfig, "sst.theta_inactive");
             cfg->N_inactive = (unsigned int *) malloc(sizeof(unsigned int) * cfg->nTracksMax);
@@ -1165,7 +1165,7 @@
         // | Sample rate                                              |
         // +----------------------------------------------------------+
 
-            cfg->fS = parameters_lookup_int(fileConfig, "general.samplerate.mu");        
+            cfg->fS = parameters_lookup_int(fileConfig, "general.samplerate.mu");
 
         // +----------------------------------------------------------+
         // | Number of tracked sources                                |
@@ -1202,10 +1202,10 @@
 
             if (strcmp(tmpStr1, "json") == 0) { cfg->format = format_construct_text_json(); }
             else if (strcmp(tmpStr1, "binary") == 0) { cfg->format = format_construct_binary_float(); }
-            else if (strcmp(tmpStr1, "undefined") == 0) { cfg->format = format_construct_undefined(); }            
+            else if (strcmp(tmpStr1, "undefined") == 0) { cfg->format = format_construct_undefined(); }
             else { printf("sst.tracked.format: Invalid format\n"); exit(EXIT_FAILURE); }
 
-            free((void *) tmpStr1);       
+            free((void *) tmpStr1);
 
         // +----------------------------------------------------------+
         // | Interface                                                |
@@ -1218,14 +1218,14 @@
                 cfg->interface = interface_construct_blackhole();
 
             }
-            else if (strcmp(tmpStr1, "file") == 0) { 
+            else if (strcmp(tmpStr1, "file") == 0) {
 
                 tmpStr2 = parameters_lookup_string(fileConfig, "sst.tracked.interface.path");
                 cfg->interface = interface_construct_file(tmpStr2);
                 free((void *) tmpStr2);
 
             }
-            else if (strcmp(tmpStr1, "socket") == 0) { 
+            else if (strcmp(tmpStr1, "socket") == 0) {
 
                 tmpStr2 = parameters_lookup_string(fileConfig, "sst.tracked.interface.ip");
                 tmpInt1 = parameters_lookup_int(fileConfig, "sst.tracked.interface.port");
@@ -1236,7 +1236,7 @@
             }
             else if (strcmp(tmpStr1, "terminal") == 0) {
 
-                cfg->interface = interface_construct_terminal();               
+                cfg->interface = interface_construct_terminal();
 
             }
             else {
@@ -1280,7 +1280,7 @@
             }
             else if (strcmp(tmpStr1, "dmvdr") == 0) {
                 cfg->mode_sep = 'm';
-            }            
+            }
             else {
                 printf("sss.mode_sep: Invalid separation method.\n");
                 exit(EXIT_FAILURE);
@@ -1337,7 +1337,7 @@
                         cfg->mics->sigma2[iChannel * 9 + iSample] = parameters_lookup_float(fileConfig, tmpLabel);
                         free((void *) tmpLabel);
 
-                    }            
+                    }
 
                 // +--------------------------------------------------+
                 // | Direction                                        |
@@ -1350,7 +1350,7 @@
                         cfg->mics->direction[iChannel * 3 + iSample] = parameters_lookup_float(fileConfig, tmpLabel);
                         free((void *) tmpLabel);
 
-                    } 
+                    }
 
                 // +--------------------------------------------------+
                 // | Angle                                            |
@@ -1444,7 +1444,7 @@
         // | alphaD                                                   |
         // +----------------------------------------------------------+
 
-            cfg->pf_ms_alphaD = parameters_lookup_float(fileConfig, "sne.alphaD");  
+            cfg->pf_ms_alphaD = parameters_lookup_float(fileConfig, "sne.alphaD");
 
         // +----------------------------------------------------------+
         // | eta                                                      |
@@ -1524,7 +1524,7 @@
 
             cfg->pf_ss_Gslope = parameters_lookup_float(fileConfig, "sss.ss.Gslope");
 
-        return cfg;      
+        return cfg;
 
     }
 
@@ -1542,7 +1542,7 @@
         // | Sample rate                                              |
         // +----------------------------------------------------------+
 
-            cfg->fS = parameters_lookup_int(fileConfig, "general.samplerate.mu");        
+            cfg->fS = parameters_lookup_int(fileConfig, "general.samplerate.mu");
 
         // +----------------------------------------------------------+
         // | Half frame size                                          |
@@ -1574,7 +1574,7 @@
         // | Sample rate                                              |
         // +----------------------------------------------------------+
 
-            cfg->fS = parameters_lookup_int(fileConfig, "general.samplerate.mu");        
+            cfg->fS = parameters_lookup_int(fileConfig, "general.samplerate.mu");
 
         // +----------------------------------------------------------+
         // | Half frame size                                          |
@@ -1590,7 +1590,7 @@
 
         return cfg;
 
-    }    
+    }
 
     mod_istft_cfg * parameters_mod_istft_seps_config(const char * fileConfig) {
 
@@ -1622,7 +1622,7 @@
         // | Sample rate                                              |
         // +----------------------------------------------------------+
 
-            cfg->fS = parameters_lookup_int(fileConfig, "general.samplerate.mu");        
+            cfg->fS = parameters_lookup_int(fileConfig, "general.samplerate.mu");
 
         // +----------------------------------------------------------+
         // | Hop size                                                 |
@@ -1650,7 +1650,7 @@
         // | Sample rate                                              |
         // +----------------------------------------------------------+
 
-            cfg->fS = parameters_lookup_int(fileConfig, "general.samplerate.mu");        
+            cfg->fS = parameters_lookup_int(fileConfig, "general.samplerate.mu");
 
         // +----------------------------------------------------------+
         // | Hop size                                                 |
@@ -1681,8 +1681,8 @@
         // | Sample rates                                             |
         // +----------------------------------------------------------+
 
-            tmpInt1 = parameters_lookup_int(fileConfig, "general.samplerate.mu");        
-            tmpInt2 = parameters_lookup_int(fileConfig, "sss.separated.fS");              
+            tmpInt1 = parameters_lookup_int(fileConfig, "general.samplerate.mu");
+            tmpInt2 = parameters_lookup_int(fileConfig, "sss.separated.fS");
 
             cfg->fSin = tmpInt1;
             cfg->fSout = tmpInt2;
@@ -1704,15 +1704,15 @@
         // | Sample rates                                             |
         // +----------------------------------------------------------+
 
-            tmpInt1 = parameters_lookup_int(fileConfig, "general.samplerate.mu");        
-            tmpInt2 = parameters_lookup_int(fileConfig, "sss.postfiltered.fS");              
+            tmpInt1 = parameters_lookup_int(fileConfig, "general.samplerate.mu");
+            tmpInt2 = parameters_lookup_int(fileConfig, "sss.postfiltered.fS");
 
             cfg->fSin = tmpInt1;
             cfg->fSout = tmpInt2;
 
         return cfg;
 
-    }    
+    }
 
     msg_hops_cfg * parameters_msg_hops_seps_rs_config(const char * fileConfig) {
 
@@ -1724,7 +1724,7 @@
         // | Sample rate                                              |
         // +----------------------------------------------------------+
 
-            cfg->fS = parameters_lookup_int(fileConfig, "sss.separated.fS");        
+            cfg->fS = parameters_lookup_int(fileConfig, "sss.separated.fS");
 
         // +----------------------------------------------------------+
         // | Hop size                                                 |
@@ -1752,7 +1752,7 @@
         // | Sample rate                                              |
         // +----------------------------------------------------------+
 
-            cfg->fS = parameters_lookup_int(fileConfig, "sss.postfiltered.fS");        
+            cfg->fS = parameters_lookup_int(fileConfig, "sss.postfiltered.fS");
 
         // +----------------------------------------------------------+
         // | Hop size                                                 |
@@ -1768,7 +1768,7 @@
 
         return cfg;
 
-    }    
+    }
 
     mod_volume_cfg * parameters_mod_volume_seps_config(const char * fileConfig) {
 
@@ -1812,7 +1812,7 @@
         // | Sample rate                                              |
         // +----------------------------------------------------------+
 
-            cfg->fS = parameters_lookup_int(fileConfig, "sss.separated.fS");        
+            cfg->fS = parameters_lookup_int(fileConfig, "sss.separated.fS");
 
         // +----------------------------------------------------------+
         // | Hop size                                                 |
@@ -1840,7 +1840,7 @@
         // | Sample rate                                              |
         // +----------------------------------------------------------+
 
-            cfg->fS = parameters_lookup_int(fileConfig, "sss.postfiltered.fS");        
+            cfg->fS = parameters_lookup_int(fileConfig, "sss.postfiltered.fS");
 
         // +----------------------------------------------------------+
         // | Hop size                                                 |
@@ -1886,7 +1886,7 @@
             else {
                 printf("raw.nBits: Invalid number of bits\n");
                 exit(EXIT_FAILURE);
-            }    
+            }
 
         // +----------------------------------------------------------+
         // | Interface                                                |
@@ -1900,14 +1900,14 @@
                 cfg->format = format_construct_undefined();
 
             }
-            else if (strcmp(tmpStr1, "file") == 0) { 
+            else if (strcmp(tmpStr1, "file") == 0) {
 
                 tmpStr2 = parameters_lookup_string(fileConfig, "sss.separated.interface.path");
                 cfg->interface = interface_construct_file(tmpStr2);
                 free((void *) tmpStr2);
 
             }
-            else if (strcmp(tmpStr1, "socket") == 0) { 
+            else if (strcmp(tmpStr1, "socket") == 0) {
 
                 tmpStr2 = parameters_lookup_string(fileConfig, "sss.separated.interface.ip");
                 tmpInt1 = parameters_lookup_int(fileConfig, "sss.separated.interface.port");
@@ -1918,7 +1918,7 @@
             }
             else if (strcmp(tmpStr1, "terminal") == 0) {
 
-                cfg->interface = interface_construct_terminal();               
+                cfg->interface = interface_construct_terminal();
 
             }
             else {
@@ -1961,7 +1961,7 @@
             else {
                 printf("raw.nBits: Invalid number of bits\n");
                 exit(EXIT_FAILURE);
-            }    
+            }
 
         // +----------------------------------------------------------+
         // | Type                                                     |
@@ -1975,14 +1975,14 @@
                 cfg->format = format_construct_undefined();
 
             }
-            else if (strcmp(tmpStr1, "file") == 0) { 
+            else if (strcmp(tmpStr1, "file") == 0) {
 
                 tmpStr2 = parameters_lookup_string(fileConfig, "sss.postfiltered.interface.path");
                 cfg->interface = interface_construct_file(tmpStr2);
                 free((void *) tmpStr2);
 
             }
-            else if (strcmp(tmpStr1, "socket") == 0) { 
+            else if (strcmp(tmpStr1, "socket") == 0) {
 
                 tmpStr2 = parameters_lookup_string(fileConfig, "sss.postfiltered.interface.ip");
                 tmpInt1 = parameters_lookup_int(fileConfig, "sss.postfiltered.interface.port");
@@ -1993,7 +1993,7 @@
             }
             else if (strcmp(tmpStr1, "terminal") == 0) {
 
-                cfg->interface = interface_construct_terminal();               
+                cfg->interface = interface_construct_terminal();
 
             }
             else {
@@ -2065,7 +2065,7 @@
 
         // +----------------------------------------------------------+
         // | r0                                                       |
-        // +----------------------------------------------------------+           
+        // +----------------------------------------------------------+
 
             cfg->r0 = parameters_lookup_float(fileConfig, "classify.r0");
 
@@ -2083,13 +2083,13 @@
         // | Number of channels                                       |
         // +----------------------------------------------------------+
 
-            cfg->nChannels = parameters_count(fileConfig, "sst.N_inactive");        
+            cfg->nChannels = parameters_count(fileConfig, "sst.N_inactive");
 
         // +----------------------------------------------------------+
         // | Sample rate                                              |
         // +----------------------------------------------------------+
 
-            cfg->fS = parameters_lookup_int(fileConfig, "general.samplerate.mu");  
+            cfg->fS = parameters_lookup_int(fileConfig, "general.samplerate.mu");
 
         return cfg;
 
@@ -2117,10 +2117,10 @@
             tmpStr1 = parameters_lookup_string(fileConfig, "classify.category.format");
 
             if (strcmp(tmpStr1, "json") == 0) { cfg->format = format_construct_text_json(); }
-            else if (strcmp(tmpStr1, "undefined") == 0) { cfg->format = format_construct_undefined(); }                       
+            else if (strcmp(tmpStr1, "undefined") == 0) { cfg->format = format_construct_undefined(); }
             else { printf("classify.category.format: Invalid format\n"); exit(EXIT_FAILURE); }
 
-            free((void *) tmpStr1);       
+            free((void *) tmpStr1);
 
         // +----------------------------------------------------------+
         // | Type                                                     |
@@ -2133,14 +2133,14 @@
                 cfg->interface = interface_construct_blackhole();
 
             }
-            else if (strcmp(tmpStr1, "file") == 0) { 
+            else if (strcmp(tmpStr1, "file") == 0) {
 
                 tmpStr2 = parameters_lookup_string(fileConfig, "classify.category.interface.path");
                 cfg->interface = interface_construct_file(tmpStr2);
                 free((void *) tmpStr2);
 
             }
-            else if (strcmp(tmpStr1, "socket") == 0) { 
+            else if (strcmp(tmpStr1, "socket") == 0) {
 
                 tmpStr2 = parameters_lookup_string(fileConfig, "classify.category.interface.ip");
                 tmpInt1 = parameters_lookup_int(fileConfig, "classify.category.interface.port");
@@ -2151,7 +2151,7 @@
             }
             else if (strcmp(tmpStr1, "terminal") == 0) {
 
-                cfg->interface = interface_construct_terminal();               
+                cfg->interface = interface_construct_terminal();
 
             }
             else {
@@ -2162,6 +2162,53 @@
             }
 
             free((void *) tmpStr1);
+
+        return cfg;
+
+    }
+
+    msg_hops_cfg * parameters_msg_hops_raw_config(const char * fileConfig) {
+        msg_hops_cfg * cfg;
+
+        cfg = msg_hops_cfg_construct();
+        // fS is actually unused
+        cfg->fS = parameters_lookup_int(fileConfig, "raw.fS");
+        cfg->hopSize = parameters_lookup_int(fileConfig, "general.size.hopSize");
+        cfg->nChannels = parameters_count(fileConfig, "mapping.map");
+
+        return cfg;
+    }
+
+    snk_hops_cfg * parameters_snk_hops_raw_config(const char * fileConfig) {
+        snk_hops_cfg * cfg;
+
+        cfg = snk_hops_cfg_construct();
+        // fS is unused
+        cfg->fS = parameters_lookup_int(fileConfig, "raw.fS");
+        cfg->format = format_construct_binary_int(16);
+
+        char *tmpStr1 = parameters_lookup_string(fileConfig, "general.hops.interface.type");
+
+        if (strcmp(tmpStr1, "blackhole") == 0) {
+            cfg->interface = interface_construct_blackhole();
+        }
+        else if (strcmp(tmpStr1, "file") == 0) {
+            char *path = parameters_lookup_string(fileConfig, "general.hops.interface.path");
+            cfg->interface = interface_construct_file(path);
+            free((void *) path);
+        }
+        else if (strcmp(tmpStr1, "socket") == 0) {
+            char *ip= parameters_lookup_string(fileConfig, "general.hops.interface.ip");
+            int port = parameters_lookup_int(fileConfig, "general.hops.interface.port");
+            cfg->interface = interface_construct_socket(ip, port);
+            free((void *) ip);
+        }
+        else {
+            printf("ssl.potential.interface.type: Invalid type\n");
+            exit(EXIT_FAILURE);
+        }
+
+        free((void *) tmpStr1);
 
         return cfg;
 

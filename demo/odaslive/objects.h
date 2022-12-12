@@ -28,6 +28,7 @@
         snk_pots_obj * snk_pots_ssl_object;
         con_pots_obj * con_pots_ssl_object;
         snk_samples_obj * snk_samples_object;
+        snk_hops_obj * snk_hops_raw_object;
 
         inj_targets_obj * inj_targets_sst_object;
         con_targets_obj * con_targets_sst_object;

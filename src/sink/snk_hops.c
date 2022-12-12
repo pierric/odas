@@ -1,4 +1,4 @@
-   
+
    /**
     * \file     snk_hops.c
     * \author   François Grondin <francois.grondin2@usherbrooke.ca>
@@ -15,12 +15,12 @@
     * but WITHOUT ANY WARRANTY; without even the implied warranty of
     * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     * GNU General Public License for more details.
-    * 
+    *
     * You should have received a copy of the GNU General Public License
     * along with this program.  If not, see <http://www.gnu.org/licenses/>.
     *
     */
-    
+
     #include <sink/snk_hops.h>
 
     snk_hops_obj * snk_hops_construct(const snk_hops_cfg * snk_hops_config, const msg_hops_cfg * msg_hops_config) {
@@ -34,7 +34,7 @@
         obj->hopSize = msg_hops_config->hopSize;
         obj->nChannels = msg_hops_config->nChannels;
         obj->fS = snk_hops_config->fS;
-        
+
         obj->format = format_clone(snk_hops_config->format);
         obj->interface = interface_clone(snk_hops_config->interface);
 
@@ -49,7 +49,7 @@
               ((obj->interface->type == interface_socket)  && (obj->format->type == format_binary_int16)) ||
               ((obj->interface->type == interface_socket)  && (obj->format->type == format_binary_int24)) ||
               ((obj->interface->type == interface_socket)  && (obj->format->type == format_binary_int32)))) {
-            
+
             printf("Sink hops: Invalid interface and/or format.\n");
             exit(EXIT_FAILURE);
 
@@ -114,7 +114,7 @@
                 printf("Sink hops: Invalid interface type.\n");
                 exit(EXIT_FAILURE);
 
-            break;           
+            break;
 
         }
 
@@ -151,7 +151,7 @@
             printf("Sink hops: Cannot connect to server\n");
             exit(EXIT_FAILURE);
 
-        }          
+        }
 
     }
 
@@ -222,7 +222,7 @@
 
                 case format_binary_int16:
 
-                    snk_hops_process_format_binary_int16(obj);                
+                    snk_hops_process_format_binary_int16(obj);
 
                 break;
 
@@ -259,7 +259,7 @@
 
                     snk_hops_process_interface_blackhole(obj);
 
-                break;  
+                break;
 
                 case interface_file:
 
@@ -402,7 +402,7 @@
 
         obj->bufferSize = nBytesTotal;
 
-    }    
+    }
 
     void snk_hops_process_format_binary_int32(snk_hops_obj * obj) {
 

@@ -108,4 +108,7 @@
 
     snk_categories_cfg * parameters_snk_categories_config(const char * fileConfig);
 
+    msg_hops_cfg * parameters_msg_hops_raw_config(const char * fileConfig);
+
+    snk_hops_cfg * parameters_snk_hops_raw_config(const char * fileConfig);
 #endif

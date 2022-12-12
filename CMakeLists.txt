@@ -205,6 +205,7 @@ target_link_libraries(odas
     ${PC_ALSA_LIBRARIES}
     ${PC_LIBCONFIG_LIBRARIES}
     ${PC_PULSEAUDIO_LIBRARIES}
+    #${PC_HDF5_LIBRARIES}
     ${pkgcfg_lib_PC_HDF5_hdf5}
     m
     pthread

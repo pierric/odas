@@ -375,3 +375,4 @@
         printf("gainMin = %f\n", cfg->gainMin);
 
     }
+
